@@ -10,7 +10,7 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use function App\Gendiff\generate;
+use function Differ\Differ\genDiff;
 
 $doc = <<<DOC
 
@@ -34,4 +34,4 @@ $format = $args['--format'] ?? 'stylish';
 $firstFile = $args['<firstFile>'];
 $secondFile = $args['<secondFile>'];
 
-generate($format, $firstFile, $secondFile);
+genDiff( $firstFile, $secondFile, $format);
