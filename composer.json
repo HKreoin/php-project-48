@@ -1,7 +1,7 @@
 {
-    "name": "kreoin/gendiff",
+    "name": "hexlet/code",
     "description": "PHP Hexlet Project #2",
-    "type": "library",
+    "type": "project",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -27,7 +27,5 @@
     },
     "bin:": [
         "bin/gendiff"
-    ],
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    ]
 }
