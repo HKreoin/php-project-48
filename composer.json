@@ -7,7 +7,7 @@
         "psr-4": {
             "Hexlet\\Code\\": "src/"
         },
-        "files": ["src/Gendiff.php"]
+        "files": ["src/gendiff.php"]
     },
     "authors": [
         {

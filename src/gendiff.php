@@ -2,7 +2,7 @@
 
 namespace Differ\Differ;
 
-function genDiff($filepath1 , $filepath2, $format = 'stylish'): void 
+function genDiff($filepath1, $filepath2, $format = 'stylish'): void
 {
     //echo $format . ' ' . $filepath1 . ' ' . $filepath2 . "\n";
     $filecontent1 = file_get_contents(realpath($filepath1));
@@ -18,7 +18,7 @@ function genDiff($filepath1 , $filepath2, $format = 'stylish'): void
         $keyExist1 = array_key_exists($key, $json1);
         $keyExist2 = array_key_exists($key, $json2);
         if ($keyExist1 && $keyExist2) {
-            if($json1[$key] === $json2[$key]) {
+            if ($json1[$key] === $json2[$key]) {
                 $resultDiff[] = "  {$key}: " . getValue($json1, $key);
             } else {
                 $resultDiff[] = "- {$key}: " . getValue($json1, $key);
@@ -30,18 +30,18 @@ function genDiff($filepath1 , $filepath2, $format = 'stylish'): void
             $resultDiff[] = "+ {$key}: " . getValue($json2, $key);
         }
     }
-    print_r(implode("\n",$resultDiff));
+    print_r(implode("\n", $resultDiff));
     print_r("\n");
 }
 
-function getValue($assoc, $key) 
+function getValue($assoc, $key)
 {
     $value = $assoc[$key];
     if ($value == 1) {
         return 'true';
-    } 
+    }
     if ($value == '') {
         return 'false';
     }
     return $value;
-};
+}
