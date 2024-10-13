@@ -34,4 +34,6 @@ $format = $args['--format'] ?? 'stylish';
 $firstFile = realpath($args['<firstFile>']);
 $secondFile = realpath($args['<secondFile>']);
 
-genDiff( $firstFile, $secondFile, $format);
+$diff = genDiff( $firstFile, $secondFile, $format);
+print_r($diff);
+print_r("\n");

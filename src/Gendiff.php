@@ -12,6 +12,7 @@ function genDiff($filepath1, $filepath2, $format = 'stylish')
     asort($keys);
     $keys = array_values($keys);
     $resultDiff = [];
+
     foreach ($keys as $key) {
         $keyExist1 = array_key_exists($key, $json1);
         $keyExist2 = array_key_exists($key, $json2);
@@ -28,9 +29,9 @@ function genDiff($filepath1, $filepath2, $format = 'stylish')
             $resultDiff[] = "  + {$key}: " . getValue($json2, $key);
         }
     }
+
     $resultStr = "{\n" . implode("\n", $resultDiff) . "\n}";
-    print_r($resultStr);
-    print_r("\n");
+
     return $resultStr;
 }
 
