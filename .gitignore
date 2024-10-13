@@ -1,2 +1,4 @@
-/vendor/
+/vendor
 demo.cast
+/.phpunit.cache
+/build
