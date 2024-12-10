@@ -3,6 +3,7 @@
 namespace Differ\Differ;
 
 use function Differ\Formatters\format;
+use function Differ\Formatters\getFormattedDiff;
 use function Differ\Parsers\parse;
 
 function genDiff($filepath1, $filepath2, $format = 'stylish')
@@ -13,19 +14,24 @@ function genDiff($filepath1, $filepath2, $format = 'stylish')
     $resultDiff = [];
 
     $resultDiff = getDiff($data1, $data2);
-    return format($resultDiff, $format);
+    return getFormattedDiff($resultDiff, $format);
 }
 
-function getValue($assoc, $key)
+function getValue($value)
 {
-    $value = $assoc[$key];
-    if ($value == 1) {
-        return 'true';
+    if (is_string($value)) {
+        return $value;
     }
-    if ($value == '') {
-        return 'false';
+    if (is_array($value)) {
+        return array_map(function ($k, $v) {
+            if (is_array($v)) {
+                return ['type' => 'unchanged', 'key' => $k, 'value' => getValue($v)];
+            } else {
+                return ['type' => 'unchanged', 'key' => $k, 'value' => $v];
+            }
+        }, $value);
     }
-    return $value;
+    return json_encode($value);
 }
 
 function getSortedKeys($data1, $data2)
@@ -46,28 +52,36 @@ function getDiff($data1, $data2)
             return [
                 'type' => 'removed',
                 'key' => $key,
-                'value' => getValue($data1, $key)
+                'value' => getValue($data1[$key])
             ];
-        } elseif (!$keyExist1) {
+        }
+        if (!$keyExist1) {
             return [
                 'type' => 'added',
                 'key' => $key,
-                'value' => getValue($data2, $key)
+                'value' => getValue($data2[$key])
             ];
-        } elseif ($data1[$key] === $data2[$key]) {
+        }
+        if (is_array($data1[$key]) && is_array($data2[$key])) {
             return [
                 'type' => 'unchanged',
                 'key' => $key,
-                'value' => getValue($data1, $key)
-            ];
-        } else {
-            return [
-                'type' => 'changed',
-                'key' => $key,
-                'value1' => getValue($data1, $key),
-                'value2' => getValue($data2, $key)
+                'value' => getDiff($data1[$key], $data2[$key])
             ];
         }
+        if ($data1[$key] === $data2[$key]) {
+            return [
+                'type' => 'unchanged',
+                'key' => $key,
+                'value' => getValue($data1[$key])
+            ];
+        }
+        return [
+            'type' => 'changed',
+            'key' => $key,
+            'value1' => getValue($data1[$key]),
+            'value2' => getValue($data2[$key])
+        ];
     }, $keys);
     return $diff;
 }
