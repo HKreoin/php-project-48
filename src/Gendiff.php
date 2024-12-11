@@ -19,9 +19,6 @@ function genDiff($filepath1, $filepath2, $format = 'stylish')
 
 function getValue($value)
 {
-    if (is_string($value)) {
-        return $value;
-    }
     if (is_array($value)) {
         return array_map(function ($k, $v) {
             if (is_array($v)) {
@@ -29,9 +26,9 @@ function getValue($value)
             } else {
                 return ['type' => 'unchanged', 'key' => $k, 'value' => $v];
             }
-        }, $value);
+        }, array_keys($value), $value);
     }
-    return json_encode($value);
+    return $value;
 }
 
 function getSortedKeys($data1, $data2)
@@ -79,8 +76,8 @@ function getDiff($data1, $data2)
         return [
             'type' => 'changed',
             'key' => $key,
-            'value1' => getValue($data1[$key]),
-            'value2' => getValue($data2[$key])
+            'oldValue' => getValue($data1[$key]),
+            'value' => getValue($data2[$key])
         ];
     }, $keys);
     return $diff;
