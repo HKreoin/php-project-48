@@ -27,3 +27,7 @@ gendiff -h
 ## Compare two nested json files with plain formatter
 
 [![asciicast](https://asciinema.org/a/XTbllubyNNTcSlW2V60PWOL8P.svg)](https://asciinema.org/a/XTbllubyNNTcSlW2V60PWOL8P)
+
+## Compare two nested json files with json formatter
+
+[![asciicast](https://asciinema.org/a/eRg1V3PQiR0h1wfZMu82L2RVp.svg)](https://asciinema.org/a/eRg1V3PQiR0h1wfZMu82L2RVp)

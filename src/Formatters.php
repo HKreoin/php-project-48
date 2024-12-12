@@ -10,6 +10,7 @@ function getFormattedDiff(array $content, string $format): string
     return match ($format) {
         'stylish' => stylishFormat($content),
         'plain' => plainFormat($content),
+        'json' => json_encode($content, JSON_PRETTY_PRINT),
         default => throw new \Exception("Unknown format: $format"),
     };
 }
