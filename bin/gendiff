@@ -28,7 +28,7 @@ Options:
 
 DOC;
 
-$args = Docopt::handle($doc, array('version' => '0.1'));
+$args = Docopt::handle($doc, array('version' => 'gendiff 0.9'));
 
 $format = $args['--format'] ?? 'stylish';
 $firstFile = realpath($args['<firstFile>']);
