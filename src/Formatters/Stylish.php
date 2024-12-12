@@ -24,7 +24,7 @@ function formatData(array $content, int $level = 0): string
     }, $content));
 }
 
-function formatValue($value, int $level): string
+function formatValue(mixed $value, int $level): string
 {
     if (is_array($value)) {
         $data = formatData($value, $level);
