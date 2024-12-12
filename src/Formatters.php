@@ -2,12 +2,14 @@
 
 namespace Differ\Formatters;
 
-use function Differ\Formatters\Stylish\format;
+use function Differ\Formatters\Stylish\format as stylishFormat;
+use function Differ\Formatters\Plain\format as plainFormat;
 
-function getFormattedDiff($content, $format)
+function getFormattedDiff(array $content, string $format): string
 {
     return match ($format) {
-        'stylish' => format($content),
+        'stylish' => stylishFormat($content),
+        'plain' => plainFormat($content),
         default => throw new \Exception("Unknown format: $format"),
     };
 }

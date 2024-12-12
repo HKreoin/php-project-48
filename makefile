@@ -27,3 +27,6 @@ gendiff-test:
 
 gendiff-test-nested:
 	./bin/gendiff files/file3.json files/file4.json
+
+gendiff-test-plainformat:
+	./bin/gendiff --format plain files/file3.json files/file4.json
