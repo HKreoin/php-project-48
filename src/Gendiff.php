@@ -4,14 +4,12 @@ namespace Differ\Differ;
 
 use function Differ\Formatters\getFormattedDiff;
 use function Differ\Parsers\parse;
+use function Functional\sort;
 
 function genDiff(string $filepath1, string $filepath2, string $format = 'stylish'): string
 {
     $data1 = parse($filepath1);
     $data2 = parse($filepath2);
-
-    $resultDiff = [];
-
     $resultDiff = getDiff($data1, $data2);
     return getFormattedDiff($resultDiff, $format);
 }
@@ -33,9 +31,7 @@ function getValue(mixed $value): mixed
 function getSortedKeys(array $data1, array $data2): array
 {
     $keys = array_keys([...$data1, ...$data2]);
-    asort($keys);
-    $keys = array_values($keys);
-    return $keys;
+    return sort($keys, fn($a, $b) => strcmp($a, $b));
 }
 
 function getDiff(array $data1, array $data2): array

@@ -20,6 +20,7 @@ function formatData(array $content, int $level = 0): string
             'removed' => "{$spaces}  - {$key}: {$value}",
             'unchanged' => "{$spaces}    {$key}: {$value}",
             'changed' => "{$spaces}  - {$key}: {$oldValue}\n{$spaces}  + {$key}: {$value}",
+            default => throw new \Exception("Unknown type: $type"),
         };
     }, $content));
 }
