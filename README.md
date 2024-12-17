@@ -6,19 +6,31 @@
 
 # Gendiff program
 
+Console program that determines the difference between two data structures.
+
+## Install
+
+```bash
+git clone https://github.com/HKreoin/php-project-48.git
+cd php-project-48
+make install
+```
+
+## Features 
+
+- Support for different input formats: yaml and json.
+- Report generation in the form of plain text, stylish and json.
+
 Use next command for information:
 
 ```sh
-gendiff -h
+./bin/gendiff -h
 ```
+## Example command
 
-## Compare two plain json files
-
-[![asciicast](https://asciinema.org/a/XefnuCH4jBe5DEHQtJq3CFy1A.svg)](https://asciinema.org/a/XefnuCH4jBe5DEHQtJq3CFy1A)
-
-## Compare two plain yaml files
-
-[![asciicast](https://asciinema.org/a/Sr8jOJfQt1dWfUQQxIA8wu18f.svg)](https://asciinema.org/a/Sr8jOJfQt1dWfUQQxIA8wu18f)
+```sh
+./bin/gendiff --format plain files/file3.json files/file4.json
+```
 
 ## Compare two nested json files
 
